@@ -37,7 +37,7 @@ public class PersonneApiAdapter {
     public List<PersonneAPI> getAllPersonnes() {
         List<Personne> listeDePersonne = this.getAllPersonnes.execute();
         if(listeDePersonne != null)
-            return this.getAllPersonnes.execute().stream().map(this::toPersonneAPI).collect(Collectors.toList());
+            return listeDePersonne.stream().map(this::toPersonneAPI).collect(Collectors.toList());
         return null;
     }
 

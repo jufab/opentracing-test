@@ -26,6 +26,7 @@
         <module>zipkin</module>
         <module>jaeger</module>
         <module>personne-api-thorntail</module>
+        <module>redis</module>
     </modules>
 
     <dependencyManagement>

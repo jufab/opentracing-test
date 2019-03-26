@@ -2,6 +2,9 @@ package fr.jufab.distributed.tracing.infrastructure.database;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.jufab.distributed.tracing.AbstractTestContainerRedis;
+import io.opentracing.Tracer;
+import io.opentracing.contrib.tracerresolver.TracerFactory;
+import io.opentracing.contrib.tracerresolver.TracerResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -17,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PersonneRedisRepositoryTest extends AbstractTestContainerRedis {
 
     Jedis jedis;
+    Tracer tracer = TracerResolver.resolveTracer();
     UUID idPersonne = UUID.randomUUID();
     PersonneRedisRepository personneRedisRepository;
     PersonneRedis unePersonneRedis;
@@ -26,7 +30,7 @@ class PersonneRedisRepositoryTest extends AbstractTestContainerRedis {
         jedis = new Jedis(redis.getContainerIpAddress(), redis.getMappedPort(6379));
         unePersonneRedis = new PersonneRedis(idPersonne,"TOTO","Tata", UUID.randomUUID());
         jedis.set(idPersonne.toString(),unePersonneRedis.toJSON());
-        personneRedisRepository = new PersonneRedisRepository(jedis);
+        personneRedisRepository = new PersonneRedisRepository(jedis, tracer);
     }
 
     @Test
