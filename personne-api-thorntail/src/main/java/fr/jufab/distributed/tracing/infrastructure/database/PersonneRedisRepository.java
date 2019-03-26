@@ -1,7 +1,9 @@
 package fr.jufab.distributed.tracing.infrastructure.database;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
 import javax.inject.Inject;
@@ -12,19 +14,18 @@ import java.util.stream.Collectors;
 
 public class PersonneRedisRepository {
     Jedis jedis;
-    Logger logger;
+    static Logger LOGGER = LoggerFactory.getLogger(PersonneRedisRepository.class);
 
     @Inject
-    public PersonneRedisRepository(Jedis jedis, Logger logger) {
+    public PersonneRedisRepository(Jedis jedis) {
         this.jedis = jedis;
-        this.logger = logger;
     }
 
     void save(PersonneRedis personneRedis) {
         try {
             jedis.set(personneRedis.getIdPersonne().toString(),personneRedis.toJSON());
         } catch (JsonProcessingException e) {
-            logger.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(),e);
         }
     }
 
@@ -32,7 +33,7 @@ public class PersonneRedisRepository {
         try {
             return PersonneRedis.toObject(jedis.get(idPersonne.toString()));
         } catch (IOException e) {
-            logger.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(),e);
         }
         return null;
     }
@@ -43,7 +44,7 @@ public class PersonneRedisRepository {
             try {
                 personneRedis = PersonneRedis.toObject(jedis.get(personneKey));
             } catch (IOException e) {
-                logger.error(e.getMessage(), e);
+                LOGGER.error(e.getMessage(), e);
             }
             return personneRedis;
         }).collect(Collectors.toList());

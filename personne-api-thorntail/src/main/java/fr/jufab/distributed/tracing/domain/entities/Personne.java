@@ -1,5 +1,6 @@
 package fr.jufab.distributed.tracing.domain.entities;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Personne {
@@ -48,6 +49,17 @@ public class Personne {
 
     public void setAdresse(UUID adresse) {
         Adresse = adresse;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Personne personne = (Personne) o;
+        return Objects.equals(idPersonne, personne.idPersonne) &&
+                Objects.equals(Nom, personne.Nom) &&
+                Objects.equals(Prenom, personne.Prenom) &&
+                Objects.equals(Adresse, personne.Adresse);
     }
 
     @Override

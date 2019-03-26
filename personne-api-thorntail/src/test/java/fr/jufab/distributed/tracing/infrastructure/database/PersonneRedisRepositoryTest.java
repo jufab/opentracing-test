@@ -18,7 +18,6 @@ class PersonneRedisRepositoryTest extends AbstractTestContainerRedis {
 
     Jedis jedis;
     UUID idPersonne = UUID.randomUUID();
-    Logger logger = LoggerFactory.getLogger(PersonneRedisRepositoryTest.class);
     PersonneRedisRepository personneRedisRepository;
     PersonneRedis unePersonneRedis;
 
@@ -27,7 +26,7 @@ class PersonneRedisRepositoryTest extends AbstractTestContainerRedis {
         jedis = new Jedis(redis.getContainerIpAddress(), redis.getMappedPort(6379));
         unePersonneRedis = new PersonneRedis(idPersonne,"TOTO","Tata", UUID.randomUUID());
         jedis.set(idPersonne.toString(),unePersonneRedis.toJSON());
-        personneRedisRepository = new PersonneRedisRepository(jedis,logger);
+        personneRedisRepository = new PersonneRedisRepository(jedis);
     }
 
     @Test
