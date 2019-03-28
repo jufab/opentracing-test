@@ -25,7 +25,7 @@ public class PersonneRedisRepository {
     }
 
     void save(PersonneRedis personneRedis) {
-        Span span = tracer.activeSpan();
+        Span span = tracer.buildSpan("redis").start();
         span.log("Sauvegarde de la personne : " + personneRedis.toString());
         span.setTag("personneRedis", personneRedis.toString());
         try {

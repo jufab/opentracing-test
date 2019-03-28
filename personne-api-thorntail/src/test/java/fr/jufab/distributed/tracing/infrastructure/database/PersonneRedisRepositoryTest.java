@@ -2,6 +2,9 @@ package fr.jufab.distributed.tracing.infrastructure.database;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.jufab.distributed.tracing.AbstractTestContainerRedis;
+import io.jaegertracing.internal.JaegerTracer;
+import io.jaegertracing.thriftjava.Span;
+import io.opentracing.SpanContext;
 import io.opentracing.Tracer;
 import io.opentracing.contrib.tracerresolver.TracerFactory;
 import io.opentracing.contrib.tracerresolver.TracerResolver;
@@ -16,11 +19,13 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class PersonneRedisRepositoryTest extends AbstractTestContainerRedis {
 
     Jedis jedis;
-    Tracer tracer = TracerResolver.resolveTracer();
+    Tracer tracer = new JaegerTracer.Builder("bui:d").build();
     UUID idPersonne = UUID.randomUUID();
     PersonneRedisRepository personneRedisRepository;
     PersonneRedis unePersonneRedis;

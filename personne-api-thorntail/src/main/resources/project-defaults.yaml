@@ -2,6 +2,9 @@ thorntail:
   logging: ${env.NIVEAU_LOG:DEBUG}
   http:
     port: ${env.PERSONNE_PORT:9090}
+#  zipkin:
+#    name: personne-api
+#    url: http://localhost:9411/api/v1/spans
   jaeger:
     service-name: personne-api
     agent-host: ${env.JAEGER_HOST:localhost}
@@ -11,9 +14,6 @@ thorntail:
     sampler-type: const
     sampler-parameter: 1
     enable-b3-header-propagation: true
-  zipkin:
-    name: personne-api
-    url: http://localhost:9411/api/v1/spans
 
 # Ma config...
 redis:
