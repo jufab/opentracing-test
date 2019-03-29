@@ -1,4 +1,4 @@
-package fr.jufab.distributed.tracing.adresse;
+package fr.jufab.distributed.tracing;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

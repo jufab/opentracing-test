@@ -1,4 +1,4 @@
-package fr.jufab.distributed.tracing.adresse;
+package fr.jufab.distributed.tracing;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
