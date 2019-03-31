@@ -4,7 +4,6 @@ package fr.jufab.distributed.tracing.infrastructure.database;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
@@ -13,7 +12,6 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 @Configuration
 @ComponentScan("fr.jufab.distributed.tracing.infrastructure.database")
 @EnableRedisRepositories(basePackages = "fr.jufab.distributed.tracing.infrastructure.database")
-//@PropertySource("classpath:application.properties")
 public class AdresseRedisConfiguration {
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {

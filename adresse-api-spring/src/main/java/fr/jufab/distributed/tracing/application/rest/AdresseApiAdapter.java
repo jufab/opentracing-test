@@ -15,6 +15,7 @@ public class AdresseApiAdapter {
     GetAdresseById getAdresseById;
     SaveAdresse saveAdresse;
 
+
     public AdresseApiAdapter(GetAdresseById getAdresseById, SaveAdresse saveAdresse) {
         this.getAdresseById = getAdresseById;
         this.saveAdresse = saveAdresse;
@@ -26,7 +27,7 @@ public class AdresseApiAdapter {
     }
 
     @PostMapping
-    public void saveAdresse(@RequestBody  AdresseApi adresseApi) {
+    public void saveAdresse(@RequestBody AdresseApi adresseApi) {
         saveAdresse.execute(toAdresse(adresseApi));
     }
 

@@ -2,9 +2,11 @@ package fr.jufab.distributed.tracing.infrastructure.database;
 
 import fr.jufab.distributed.tracing.domain.entities.Adresse;
 import fr.jufab.distributed.tracing.domain.use_cases.AdressePort;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
+
 
 @Component
 public class AdresseRedisAdapter implements AdressePort {
@@ -15,11 +17,13 @@ public class AdresseRedisAdapter implements AdressePort {
         this.adresseRedisRepository = adresseRedisRepository;
     }
 
+    @NewSpan("redis")
     @Override
     public void save(Adresse adresse) {
         adresseRedisRepository.save(this.toAdresseRedis(adresse));
     }
 
+    @NewSpan("redis")
     @Override
     public Adresse getAdresseById(UUID idAdresse) {
         return adresseRedisRepository.findById(idAdresse.toString()).map(a -> toAdresse(a)).orElse(new Adresse());
