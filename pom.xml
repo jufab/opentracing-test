@@ -27,6 +27,7 @@
         <module>jaeger</module>
         <module>personne-api-thorntail</module>
         <module>adresse-api-spring</module>
+        <module>adresse-data-gouv-api-microprofile</module>
         <module>redis</module>
     </modules>
 
