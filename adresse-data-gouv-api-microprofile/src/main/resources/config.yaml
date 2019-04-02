@@ -19,6 +19,10 @@ kumuluzee:
       sampler:
         type: const # default sampler type
         param: 1 # default sampler param
+
+#        type: probabilistic
+ #       param: 0.1 => 10% des requêtes
+
 #        manager-host-port: http://localhost:5775
       propagation: B3
 #      traceid-128bit: tru
