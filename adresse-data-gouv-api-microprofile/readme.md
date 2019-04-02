@@ -8,9 +8,9 @@ The generation of the executable jar file can be performed by issuing the follow
 
     mvn clean package
 
-This will create an executable jar file **adresse-data-gouv-api-microprofile-microbundle.jar** within the _target_ maven folder. This can be started by executing the following command
+This will create an executable jar file **adresse-data-gouv-api-microprofile.jar** within the _target_ maven folder. This can be started by executing the following command
 
-    java -jar target/adresse-data-gouv-api-microprofile-microbundle.jar
+    java -jar target/adresse-data-gouv-api-microprofile.jar
 
 To launch the test page, open your browser at the following URL
 

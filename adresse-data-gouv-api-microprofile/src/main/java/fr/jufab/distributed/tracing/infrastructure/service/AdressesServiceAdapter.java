@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import fr.jufab.distributed.tracing.domain.entities.Adresse;
 import fr.jufab.distributed.tracing.domain.use_cases.AdressesPort;
+import io.opentracing.Span;
+import io.opentracing.Tracer;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.opentracing.ClientTracingRegistrar;
 import org.geojson.FeatureCollection;
@@ -26,14 +28,20 @@ public class AdressesServiceAdapter implements AdressesPort {
 
     private String urlAdresseDataGouv;
 
+    private Tracer tracer;
+
 
     @Inject
-    public AdressesServiceAdapter(@ConfigProperty(name = "url.api.adresse.base.nationale", defaultValue = "https://api-adresse.data.gouv.fr/") String urlAdresseDataGouv) {
+    public AdressesServiceAdapter(@ConfigProperty(name = "url.api.adresse.base.nationale", defaultValue = "https://api-adresse.data.gouv.fr/") String urlAdresseDataGouv, Tracer tracer) {
+        this.tracer = tracer;
         this.urlAdresseDataGouv = urlAdresseDataGouv;
     }
 
     @Override
     public List<Adresse> getDesAdressesAPartirDuNomDeLAdresse(String nomAdresse) {
+        Span span = tracer.buildSpan("service-data-gouv").start();
+        span.log("Appel via URL : " + this.urlAdresseDataGouv);
+        span.setTag("nomAdresse", nomAdresse);
         Client client = ClientTracingRegistrar.configure(ClientBuilder.newBuilder()).build();
         String reponse;
         try {
@@ -45,6 +53,8 @@ public class AdressesServiceAdapter implements AdressesPort {
         } finally {
             client.close();
         }
+        span.setTag("Reponse",reponse);
+        span.finish();
         if(!Strings.isNullOrEmpty(reponse)) {
             return toListAdresseFromJson(reponse);
         } else {

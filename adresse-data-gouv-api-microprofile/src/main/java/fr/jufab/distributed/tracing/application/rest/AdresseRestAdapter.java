@@ -3,6 +3,7 @@ package fr.jufab.distributed.tracing.application.rest;
 import fr.jufab.distributed.tracing.application.rest.ressource.AdresseAPI;
 import fr.jufab.distributed.tracing.domain.entities.Adresse;
 import fr.jufab.distributed.tracing.domain.use_cases.GetDesAdressesAPartirDuNomDeLAdresse;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -20,6 +21,7 @@ public class AdresseRestAdapter {
     GetDesAdressesAPartirDuNomDeLAdresse getDesAdressesAPartirDuNomDeLAdresse;
 
     @GET
+    @Traced(operationName = "GET Adresses")
     public List<AdresseAPI> getAdresses(@QueryParam("q") String query) {
         return toListAdresseAPI(getDesAdressesAPartirDuNomDeLAdresse.execute(query));
     }
