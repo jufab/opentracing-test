@@ -28,6 +28,7 @@
         <module>personne-api-thorntail</module>
         <module>adresse-api-spring</module>
         <module>adresse-data-gouv-api-microprofile</module>
+        <module>personne-adresse-api-sldng</module>
         <module>redis</module>
     </modules>
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-application xmlns="http://xmlns.oracle.com/weblogic/weblogic-application" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.oracle.com/weblogic/weblogic-application
+http://xmlns.oracle.com/weblogic/weblogic-application/1.6/weblogic-application.xsd">
+
+    <prefer-application-packages>
+        <package-name>org.slf4j.*</package-name>
+        <package-name>org.apache.commons</package-name>
+
+        <!-- guava -->
+        <package-name>com.google.common.*</package-name>
+
+        <!-- jersey1 providers -->
+        <package-name>com.sun.jersey.*</package-name>
+
+        <!-- media providers -->
+        <package-name>org.eclipse.persistence.jaxb.rs.*</package-name>
+        <package-name>org.codehaus.jackson.jaxrs.*</package-name>
+
+        <!-- wls -->
+        <package-name>weblogic.jaxrs.api.client.*</package-name>
+        <package-name>weblogic.jaxrs.internal.api.client.*</package-name>
+        <package-name>weblogic.jaxrs.dispatch.*</package-name>
+        <package-name>weblogic.jaxrs.monitoring.util.*</package-name>
+    </prefer-application-packages>
+
+    <prefer-application-resources>
+        <resource-name>org/slf4j/impl/StaticLoggerBinder.class</resource-name>
+    </prefer-application-resources>
+
+</weblogic-application>

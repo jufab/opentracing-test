@@ -53,14 +53,14 @@ public class PersonneApiAdapter {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Enregistre une personne")
-    public void saveControlTechnique(@ApiParam(value = "une personne",required = true) PersonneAPI personneAPI) {
+    public void savePersonne(@ApiParam(value = "une personne",required = true) PersonneAPI personneAPI) {
         savePersonne.execute(toPersonne(personneAPI));
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Modifie une personne")
-    public void updateControlTechnique(@ApiParam(value = "une personne",required = true) PersonneAPI personneAPI) {
+    public void updatePersonne(@ApiParam(value = "une personne",required = true) PersonneAPI personneAPI) {
         savePersonne.execute(toPersonne(personneAPI));
     }
 

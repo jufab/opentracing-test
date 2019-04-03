@@ -1,0 +1,9 @@
+<CONFIGMETRO>
+   <NOMBRETX ACTIVATION="true">
+      <NOMFILEJMS>metrologie</NOMFILEJMS>
+   </NOMBRETX>
+   <CONFIGJMS>
+      <FACTORY>ConnectionFactory</FACTORY>
+      <URL>tcp://activemq:61616</URL>
+   </CONFIGJMS>
+</CONFIGMETRO> 
