@@ -42,52 +42,62 @@
 			<type>pom</type>
 		</dependency>
 
-		<!-- Module de carte appel-->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-client</artifactId>
-			<version>5.15.8</version>
-		</dependency>
-
 		<dependency>
 			<groupId>fr.pe.sldng.module</groupId>
-			<artifactId>sldng-carteappel-activemq</artifactId>
+			<artifactId>sldng-contexte</artifactId>
+			<version>${framework.version}</version>
+			<type>pom</type>
+		</dependency>
+
+		<!-- Tracing! -->
+		<dependency>
+			<groupId>io.opentracing.contrib</groupId>
+			<artifactId>opentracing-cdi</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.opentracing.contrib</groupId>
+			<artifactId>opentracing-jaxrs2</artifactId>
+			<version>0.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.opentracing.contrib</groupId>
+			<artifactId>opentracing-tracerresolver</artifactId>
+			<version>0.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jaegertracing</groupId>
+			<artifactId>jaeger-client</artifactId>
+			<version>0.34.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jaegertracing</groupId>
+			<artifactId>jaeger-thrift</artifactId>
+			<version>0.34.0</version>
+		</dependency>
+
+<!--
+		<dependency>
+			<groupId>fr.pe.sldng.module</groupId>
+			<artifactId>sldng-carteappel</artifactId>
 			<version>${framework.version}</version>
 			<type>pom</type>
 		</dependency>
 
 		<dependency>
-			<groupId>fr.pe.sldng.module</groupId>
-			<artifactId>sldng-carteappel-pn-activemq</artifactId>
-			<version>${framework.version}</version>
-			<type>pom</type>
-		</dependency>
-
-<!--		<dependency>
 			<groupId>fr.pe.sldng.module</groupId>
 			<artifactId>sldng-carteappel-pn</artifactId>
 			<version>${framework.version}</version>
 			<type>pom</type>
-		</dependency>-->
+		</dependency>
 
 		<dependency>
 			<groupId>fr.pe.sldng.module</groupId>
 			<artifactId>sldng-metrologie</artifactId>
 			<version>${framework.version}</version>
 			<type>pom</type>
-			<exclusions>
-				<exclusion>
-					<groupId>fr.pe.sldng.commun</groupId>
-					<artifactId>sldng-commun-metrologie-impl</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>fr.pe.sldng.commun</groupId>
-			<artifactId>sldng-commun-metrologie-activemq-impl</artifactId>
-			<version>${framework.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>fr.pe.sldng.module</groupId>
@@ -102,7 +112,7 @@
 			<version>${framework.version}</version>
 			<type>pom</type>
 		</dependency>
-
+-->
 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -111,7 +121,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>sldng-epure</finalName>
+		<finalName>personne-adresse-api-sldng</finalName>
 		<!--<pluginManagement>
 			<plugins>
 				<plugin>

@@ -2,6 +2,8 @@ package fr.jufab.distributed.tracing.infrastructure.database;
 
 import fr.jufab.distributed.tracing.domain.entities.Adresse;
 import fr.jufab.distributed.tracing.domain.use_cases.AdressePort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import java.util.UUID;
 public class AdresseRedisAdapter implements AdressePort {
 
     AdresseRedisRepository adresseRedisRepository;
+
+    Logger logger = LoggerFactory.getLogger(AdresseRedisAdapter.class);
 
     public AdresseRedisAdapter(AdresseRedisRepository adresseRedisRepository) {
         this.adresseRedisRepository = adresseRedisRepository;
@@ -34,6 +38,12 @@ public class AdresseRedisAdapter implements AdressePort {
     }
 
     private AdresseRedis toAdresseRedis(Adresse adresse) {
-        return new AdresseRedis(adresse.getIdAdresse().toString(),adresse.getLigneAdresse1(),adresse.getLigneAdresse2(),adresse.getLigneAdresse3(),adresse.getCodePostal(),adresse.getVille());
+        logger.info("Adresse : " + adresse);
+        return new AdresseRedis(adresse.getIdAdresse().toString(),
+                adresse.getLigneAdresse1(),
+                adresse.getLigneAdresse2(),
+                adresse.getLigneAdresse3(),
+                adresse.getCodePostal(),
+                adresse.getVille());
     }
 }

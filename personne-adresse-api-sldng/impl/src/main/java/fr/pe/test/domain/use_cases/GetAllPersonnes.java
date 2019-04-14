@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 public class GetAllPersonnes {
+
     PersonnePort personnePort;
 
     @Inject

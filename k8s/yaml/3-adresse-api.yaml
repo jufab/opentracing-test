@@ -1,0 +1,154 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: tracing
+  name: redis-adresse-api
+  labels:
+    app: redis-adresse-api
+    name: redis-adresse-api
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: redis-adresse-api
+      name: redis-adresse-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: redis-adresse-api
+        name: redis-adresse-api
+    spec:
+      containers:
+        - name: redis-carnet-entretien
+          image: redis
+          # resources:
+          #    limits:
+          #      cpu: 100m
+          #      memory: 150Mi
+          ports:
+            - containerPort: 6379
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+---
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: tracing
+  name: redis-adresse-api-service
+  labels:
+    redis: redis-adresse-api-service
+spec:
+  selector:
+    name: redis-adresse-api
+    app: redis-adresse-api
+  ports:
+    - name: raa-port
+      port:  6379
+      targetPort:  6379
+
+#----------------Fin REDIS ------------------#
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: tracing
+  name: adresse-api-config
+  labels:
+    name: adresse-api-config
+    app: adresse-api
+data:
+  NIVEAU_LOG: "INFO"
+  JAEGER_HOST: "jaeger-agent.default"
+  REDIS_HOST: "redis-adresse-api-service"
+  REDIS_PORT: "6379"
+  SERVER_PORT: "8080"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: tracing
+  name: adresse-api
+  labels:
+    name: adresse-api
+    app: adresse-api
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      name: adresse-api
+      app: adresse-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        name: adresse-api
+        app: adresse-api
+    spec:
+      containers:
+        - name: adresse-api
+          image: adresse-api-spring:0.0.1-SNAPSHOT
+          imagePullPolicy: Never
+          ports:
+            - name: aa-c
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: aa-c
+            initialDelaySeconds: 30
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: aa-c
+          envFrom:
+            - configMapRef:
+                name: adresse-api-config
+      initContainers:
+        - name: init-redis-adresse-api-service
+          image: busybox
+          command: ['sh', '-c', 'until nslookup $(REDIS_HOST); do echo waiting for $(REDIS_HOST); sleep 2; done;']
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: adresse-api-config
+                  key: REDIS_HOST
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  adresse-api-service
+  labels:
+    name: adresse-api-service
+    app: adresse-api
+spec:
+  selector:
+    name: adresse-api
+    app: adresse-api
+  type:  LoadBalancer
+  ports:
+    - name: aas-port
+      port:  80
+      targetPort:  8080
+#----------------------fin------------------------#

@@ -1,5 +1,7 @@
 package fr.pe.test.infrastructure.service.personneapithorntail;
 
+import io.opentracing.contrib.jaxrs2.client.ClientTracingFeature;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -19,7 +21,7 @@ public class PersonneServiceExterneAdapter {
     }
 
     public List<PersonneServiceApi> findAllPersonnes() {
-        Client client = ClientBuilder.newBuilder().build();
+        Client client = ClientBuilder.newBuilder().register(ClientTracingFeature.class).build();
         try {
             return client.target(this.urlPersonneApiThorntail)
                     .path(V_1_PERSONNES)
@@ -32,7 +34,7 @@ public class PersonneServiceExterneAdapter {
     }
 
     public PersonneServiceApi findPersonneById(UUID idPersonne) {
-        Client client = ClientBuilder.newBuilder().build();
+        Client client = ClientBuilder.newBuilder().register(ClientTracingFeature.class).build();
         //Client client = ClientTracingRegistrar.configure(ClientBuilder.newBuilder()).build();
         try {
             return client.target(this.urlPersonneApiThorntail)
@@ -45,7 +47,7 @@ public class PersonneServiceExterneAdapter {
     }
 
     public PersonneServiceApi savePersonne(PersonneServiceApi personneServiceApi) {
-        Client client = ClientBuilder.newBuilder().build();
+        Client client = ClientBuilder.newBuilder().register(ClientTracingFeature.class).build();
         try {
             return client.target(this.urlPersonneApiThorntail)
                     .path(V_1_PERSONNES)

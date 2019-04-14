@@ -69,4 +69,16 @@ public class Adresse {
     public void setVille(String ville) {
         this.ville = ville;
     }
+
+    @Override
+    public String toString() {
+        return "Adresse{" +
+                "idAdresse=" + idAdresse +
+                ", ligneAdresse1='" + ligneAdresse1 + '\'' +
+                ", ligneAdresse2='" + ligneAdresse2 + '\'' +
+                ", ligneAdresse3='" + ligneAdresse3 + '\'' +
+                ", codePostal='" + codePostal + '\'' +
+                ", ville='" + ville + '\'' +
+                '}';
+    }
 }

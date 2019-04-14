@@ -30,6 +30,7 @@
         <module>adresse-data-gouv-api-microprofile</module>
         <module>personne-adresse-api-sldng</module>
         <module>redis</module>
+        <module>k8s</module>
     </modules>
 
     <dependencyManagement>

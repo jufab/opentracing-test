@@ -10,8 +10,8 @@ kumuluzee:
   opentracing:
     jaeger:
       service-name: adresse-data-gouv # if not set kumuluzee.name value is used
-      agent-host: localhost # default agent host
-      agent-port: 5775 # default agent port
+      agent-host: ${env.JAEGER_HOST:localhost} # default agent host
+      agent-port: ${env.JAEGER_PORT:5775} # default agent port
       reporter:
         log-spans: true
         max-queue-size: 3

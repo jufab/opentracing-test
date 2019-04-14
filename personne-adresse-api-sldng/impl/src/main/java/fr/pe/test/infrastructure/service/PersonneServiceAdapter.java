@@ -1,5 +1,7 @@
 package fr.pe.test.infrastructure.service;
 
+import fr.pe.test.application.config.UrlAdresseApi;
+import fr.pe.test.application.config.UrlPersonneApi;
 import fr.pe.test.domain.entities.Adresse;
 import fr.pe.test.domain.entities.Personne;
 import fr.pe.test.domain.use_cases.PersonnePort;
@@ -7,8 +9,13 @@ import fr.pe.test.infrastructure.service.adresseapispring.AdresseServiceApi;
 import fr.pe.test.infrastructure.service.adresseapispring.AdresseServiceExterneAdapter;
 import fr.pe.test.infrastructure.service.personneapithorntail.PersonneServiceApi;
 import fr.pe.test.infrastructure.service.personneapithorntail.PersonneServiceExterneAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -17,10 +24,12 @@ public class PersonneServiceAdapter implements PersonnePort {
 
     AdresseServiceExterneAdapter adresseServiceExterneAdapter;
     PersonneServiceExterneAdapter personneServiceExterneAdapter;
+    Logger logger = LoggerFactory.getLogger(PersonneServiceAdapter.class);
 
-    public PersonneServiceAdapter(URI urlPersonneApiThorntail, URI urlAdressesApiSpring) {
-        this.adresseServiceExterneAdapter = new AdresseServiceExterneAdapter(urlAdressesApiSpring);
-        this.personneServiceExterneAdapter = new PersonneServiceExterneAdapter(urlPersonneApiThorntail);
+    @Inject
+    public PersonneServiceAdapter(@UrlPersonneApi String urlPersonneApiThorntail, @UrlAdresseApi String urlAdressesApiSpring) throws URISyntaxException {
+        this.adresseServiceExterneAdapter = new AdresseServiceExterneAdapter(new URI(urlAdressesApiSpring));
+        this.personneServiceExterneAdapter = new PersonneServiceExterneAdapter(new URI(urlPersonneApiThorntail));
     }
 
     @Override
@@ -43,14 +52,16 @@ public class PersonneServiceAdapter implements PersonnePort {
 
     @Override
     public Personne savePersonne(Personne personne) {
-        AdresseServiceApi adresseServiceApi = this.adresseServiceExterneAdapter.saveAdresse(toAdresseServiceApi(personne.getAdresse()));
-        personne.setAdresse(toAdresse(adresseServiceApi));
-        return toPersonne(this.personneServiceExterneAdapter.savePersonne(toPersonneServiceApi(personne)),adresseServiceApi);
+        PersonneServiceApi personneServiceApi = toPersonneServiceApi(personne);
+        AdresseServiceApi adresseServiceApi = toAdresseServiceApi(personne.getAdresse());
+        this.adresseServiceExterneAdapter.saveAdresse(adresseServiceApi);
+        this.personneServiceExterneAdapter.savePersonne(personneServiceApi);
+        return personne;
     }
 
     private Personne toPersonne(PersonneServiceApi personneServiceApi, AdresseServiceApi adresseServiceApi) {
         return new Personne(
-                personneServiceApi.getIdPersonne(),
+                UUID.fromString(personneServiceApi.getIdPersonne()),
                 personneServiceApi.getNom(),
                 personneServiceApi.getPrenom(),
                 toAdresse(adresseServiceApi)
@@ -59,7 +70,7 @@ public class PersonneServiceAdapter implements PersonnePort {
 
     private Adresse toAdresse(AdresseServiceApi adresseServiceApi) {
         return new Adresse(
-                adresseServiceApi.getIdAdresse(),
+                UUID.fromString(adresseServiceApi.getIdAdresse()),
                 adresseServiceApi.getLigneAdresse1(),
                 adresseServiceApi.getLigneAdresse2(),
                 adresseServiceApi.getLigneAdresse3(),
@@ -70,7 +81,7 @@ public class PersonneServiceAdapter implements PersonnePort {
 
     private AdresseServiceApi toAdresseServiceApi(Adresse adresse) {
         return new AdresseServiceApi(
-                adresse.getIdAdresse(),
+                adresse.getIdAdresse().toString(),
                 adresse.getLigneAdresse1(),
                 adresse.getLigneAdresse2(),
                 adresse.getLigneAdresse3(),
@@ -80,10 +91,10 @@ public class PersonneServiceAdapter implements PersonnePort {
     }
     private PersonneServiceApi toPersonneServiceApi(Personne personne) {
         return new PersonneServiceApi(
-                personne.getIdPersonne(),
+                personne.getIdPersonne().toString(),
                 personne.getNom(),
                 personne.getPrenom(),
-                personne.getAdresse().getIdAdresse()
+                personne.getAdresse().getIdAdresse().toString()
         );
     }
 }

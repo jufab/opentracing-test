@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<difftree xmlns="http://xmlns.oracle.com/cie/comdev/difftree">
+  <element name="component-def" action="MODIFY">
+    <attribute name="groupId" type="java.lang.String" action="NONE" current="com.oracle.weblogic"/>
+    <attribute name="replicable" type="java.lang.Boolean" action="NONE" current="false"/>
+    <attribute name="singleton" type="java.lang.Boolean" action="NONE" current="false"/>
+    <attribute name="gdr-version" type="java.lang.String" action="MODIFY" current="1.8.1.1" original="1.8.0.0"/>
+    <attribute name="description" type="java.lang.String" action="NONE" current="Oracle WebLogic Thirdparty Module JAVAX JSON"/>
+    <attribute name="name" type="java.lang.String" action="NONE" current="oracle.wls.thirdparty.javax.json"/>
+    <attribute name="pom-gen" type="com.oracle.cie.gdr.xml.cpd.PomGenType" action="NONE" current="true"/>
+    <attribute name="version" type="java.lang.String" action="NONE" current="12.2.1.2.0"/>
+    <element name="libraries" action="NONE">
+      <element name="library" action="NONE">
+        <attribute name="ignore-type" type="java.lang.Boolean" action="NONE" current="false"/>
+        <attribute name="hk2-gen" type="java.lang.Boolean" action="NONE" current="false"/>
+        <attribute name="visibility" type="com.oracle.cie.gdr.xml.cpd.LibraryVisibilityType" action="NONE" current="none"/>
+        <attribute name="type" type="com.oracle.cie.gdr.xml.cpd.LibraryLibraryType" action="NONE" current="none"/>
+        <attribute name="pom-gen" type="java.lang.Boolean" action="NONE" current="true"/>
+        <attribute name="size" type="java.lang.Long" action="NONE" current="85147"/>
+        <attribute name="extension" type="com.oracle.cie.gdr.xml.cpd.LibraryLibraryExtension" action="NONE" current="jar"/>
+        <attribute name="ignore-version" type="java.lang.Boolean" action="NONE" current="false"/>
+        <attribute name="name" type="java.lang.String" action="NONE" current="javax.json.library"/>
+        <attribute name="suppress-prefix" type="java.lang.Boolean" action="NONE" current="false"/>
+        <attribute name="suppress-version" type="java.lang.Boolean" action="NONE" current="false"/>
+        <element name="entry" action="NONE">
+          <attribute name="explode" type="java.lang.Boolean" action="NONE" current="true"/>
+          <attribute name="match-dirs" type="java.lang.Boolean" action="NONE" current="false"/>
+          <attribute name="match-files" type="java.lang.Boolean" action="NONE" current="true"/>
+          <attribute name="name" type="java.lang.String" action="NONE" current="modules/org.glassfish.javax.json.jar"/>
+          <attribute name="include-parent" type="java.lang.Boolean" action="NONE" current="false"/>
+          <attribute name="match-path" type="java.lang.Boolean" action="NONE" current="false"/>
+        </element>
+      </element>
+    </element>
+    <element name="file-map" action="NONE">
+      <attribute name="bootstrap" type="java.lang.Boolean" action="NONE" current="false"/>
+      <attribute name="packaged" type="java.lang.Boolean" action="NONE" current="true"/>
+      <attribute name="duplicates" type="java.lang.Boolean" action="NONE" current="false"/>
+      <attribute name="source" type="java.lang.String" action="NONE" current="filegroup1.jar"/>
+      <attribute name="symbol" type="java.lang.String" action="NONE" current="wls.common.symbol"/>
+      <attribute name="compacted" type="java.lang.Boolean" action="NONE" current="false"/>
+      <attribute name="expanded" type="java.lang.Boolean" action="NONE" current="true"/>
+      <attribute name="pom-gen" type="java.lang.Boolean" action="NONE" current="true"/>
+      <element name="file-perms" action="NONE">
+        <element name="permission" action="NONE">
+          <attribute name="source-perms" type="java.lang.Boolean" action="NONE" current="false"/>
+          <attribute name="match-dirs" type="java.lang.Boolean" action="NONE" current="true"/>
+          <attribute name="match-files" type="java.lang.Boolean" action="NONE" current="true"/>
+          <attribute name="regex" type="java.lang.String" action="NONE" current=".*"/>
+          <attribute name="match-path" type="java.lang.Boolean" action="NONE" current="false"/>
+          <attribute name="mode" type="java.lang.String" action="NONE" current="750"/>
+        </element>
+      </element>
+      <element name="directory" action="NONE">
+        <attribute name="deinstall" type="java.lang.Boolean" action="NONE" current="true"/>
+        <attribute name="recurse" type="java.lang.Boolean" action="NONE" current="true"/>
+        <attribute name="dest" type="java.lang.String" action="NONE" current=""/>
+        <attribute name="patchable" type="java.lang.Boolean" action="NONE" current="true"/>
+        <attribute name="include-empty-dirs" type="java.lang.Boolean" action="NONE" current="false"/>
+        <attribute name="preserve-symlinks" type="java.lang.Boolean" action="NONE" current="false"/>
+        <element name="file-perms" action="NONE">
+          <element name="permission" action="NONE">
+            <attribute name="source-perms" type="java.lang.Boolean" action="NONE" current="false"/>
+            <attribute name="match-dirs" type="java.lang.Boolean" action="NONE" current="false"/>
+            <attribute name="match-files" type="java.lang.Boolean" action="NONE" current="true"/>
+            <attribute name="regex" type="java.lang.String" action="NONE" current=".*"/>
+            <attribute name="match-path" type="java.lang.Boolean" action="NONE" current="false"/>
+            <attribute name="mode" type="java.lang.String" action="NONE" current="640"/>
+          </element>
+        </element>
+        <element name="directory" action="NONE">
+          <attribute name="deinstall" type="java.lang.Boolean" action="NONE" current="true"/>
+          <attribute name="recurse" type="java.lang.Boolean" action="NONE" current="true"/>
+          <attribute name="mode" type="java.lang.String" action="NONE" current="750"/>
+          <attribute name="dest" type="java.lang.String" action="NONE" current="modules"/>
+          <attribute name="patchable" type="java.lang.Boolean" action="NONE" current="true"/>
+          <attribute name="include-empty-dirs" type="java.lang.Boolean" action="NONE" current="false"/>
+          <attribute name="preserve-symlinks" type="java.lang.Boolean" action="NONE" current="false"/>
+          <element name="file" action="NONE">
+            <attribute name="pack" type="java.lang.Boolean" action="NONE" current="false"/>
+            <attribute name="size" type="java.lang.Long" action="NONE" current="85147"/>
+            <attribute name="mode" type="java.lang.String" action="NONE" current="640"/>
+            <attribute name="dest" type="java.lang.String" action="NONE" current="org.glassfish.javax.json.jar"/>
+          </element>
+        </element>
+      </element>
+      <element name="exclude" action="NONE">
+        <attribute name="match-dirs" type="java.lang.Boolean" action="NONE" current="true"/>
+        <attribute name="match-files" type="java.lang.Boolean" action="NONE" current="true"/>
+        <attribute name="regex" type="java.lang.String" action="NONE" current="\.ade_path"/>
+        <attribute name="match-path" type="java.lang.Boolean" action="NONE" current="false"/>
+      </element>
+    </element>
+  </element>
+</difftree>

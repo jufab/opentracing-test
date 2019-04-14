@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 public class VerifierUneAdresse {
-    AdressesPort adressesPort;
+    private AdressesPort adressesPort;
 
     @Inject
     public VerifierUneAdresse(AdressesPort adressesPort) {

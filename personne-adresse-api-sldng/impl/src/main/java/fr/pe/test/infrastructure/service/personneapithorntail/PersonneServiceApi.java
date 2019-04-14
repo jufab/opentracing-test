@@ -1,28 +1,27 @@
 package fr.pe.test.infrastructure.service.personneapithorntail;
 
-import java.util.UUID;
 
 public class PersonneServiceApi {
-    UUID idPersonne;
+    String idPersonne;
     String nom;
     String prenom;
-    UUID idAdresse;
+    String idAdresse;
 
     public PersonneServiceApi() {
     }
 
-    public PersonneServiceApi(UUID idPersonne, String nom, String prenom, UUID idAdresse) {
+    public PersonneServiceApi(String idPersonne, String nom, String prenom, String idAdresse) {
         this.idPersonne = idPersonne;
         this.nom = nom;
         this.prenom = prenom;
         this.idAdresse = idAdresse;
     }
 
-    public UUID getIdPersonne() {
+    public String getIdPersonne() {
         return idPersonne;
     }
 
-    public void setIdPersonne(UUID idPersonne) {
+    public void setIdPersonne(String idPersonne) {
         this.idPersonne = idPersonne;
     }
 
@@ -42,11 +41,21 @@ public class PersonneServiceApi {
         this.prenom = prenom;
     }
 
-    public UUID getIdAdresse() {
+    public String getIdAdresse() {
         return idAdresse;
     }
 
-    public void setIdAdresse(UUID idAdresse) {
+    public void setIdAdresse(String idAdresse) {
         this.idAdresse = idAdresse;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonneServiceApi{" +
+                "idPersonne=" + idPersonne +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", idAdresse=" + idAdresse +
+                '}';
     }
 }

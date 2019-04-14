@@ -34,7 +34,7 @@
 						<webModule>
 							<groupId>fr.pe.test</groupId>
 							<artifactId>personne-adresse-api-sldng-impl</artifactId>
-							<contextRoot>/personne-adresse-api</contextRoot>
+							<contextRoot>/personne-adresse-api-sldng</contextRoot>
 						</webModule>
 					</modules>
 				</configuration>

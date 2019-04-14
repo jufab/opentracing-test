@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/v1/adresses",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/v1/adresses")
 public class AdresseApiAdapter {
 
     GetAdresseById getAdresseById;
@@ -21,12 +21,12 @@ public class AdresseApiAdapter {
         this.saveAdresse = saveAdresse;
     }
 
-    @GetMapping("{idAdresse}")
+    @GetMapping(value = "/{idAdresse}",produces = MediaType.APPLICATION_JSON_VALUE)
     public AdresseApi getAdresse(@PathVariable UUID idAdresse) {
         return toAdresseApi(getAdresseById.execute(idAdresse));
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public void saveAdresse(@RequestBody AdresseApi adresseApi) {
         saveAdresse.execute(toAdresse(adresseApi));
     }
@@ -45,8 +45,8 @@ public class AdresseApiAdapter {
         return new Adresse(
                 adresseApi.getIdAdresse(),
                 adresseApi.getLigneAdresse1(),
-                adresseApi.getLigneAdresse2(),
-                adresseApi.getLigneAdresse3(),
+                adresseApi.getLigneAdresse2()==null?new String():adresseApi.getLigneAdresse2(),
+                adresseApi.getLigneAdresse3()==null?new String():adresseApi.getLigneAdresse3(),
                 adresseApi.getCodePostal(),
                 adresseApi.getVille());
     }

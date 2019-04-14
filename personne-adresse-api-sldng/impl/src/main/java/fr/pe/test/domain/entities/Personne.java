@@ -49,4 +49,14 @@ public class Personne {
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
     }
+
+    @Override
+    public String toString() {
+        return "Personne{" +
+                "idPersonne=" + idPersonne +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", adresse=" + adresse +
+                '}';
+    }
 }

@@ -1,9 +1,7 @@
 package fr.pe.test.infrastructure.service.adresseapispring;
 
-import java.util.UUID;
-
 public class AdresseServiceApi {
-    UUID idAdresse;
+    String idAdresse;
     String ligneAdresse1;
     String ligneAdresse2;
     String ligneAdresse3;
@@ -13,7 +11,7 @@ public class AdresseServiceApi {
     public AdresseServiceApi() {
     }
 
-    public AdresseServiceApi(UUID idAdresse, String ligneAdresse1, String ligneAdresse2, String ligneAdresse3, String codePostal, String ville) {
+    public AdresseServiceApi(String idAdresse, String ligneAdresse1, String ligneAdresse2, String ligneAdresse3, String codePostal, String ville) {
         this.idAdresse = idAdresse;
         this.ligneAdresse1 = ligneAdresse1;
         this.ligneAdresse2 = ligneAdresse2;
@@ -22,11 +20,11 @@ public class AdresseServiceApi {
         this.ville = ville;
     }
 
-    public UUID getIdAdresse() {
+    public String getIdAdresse() {
         return idAdresse;
     }
 
-    public void setIdAdresse(UUID idAdresse) {
+    public void setIdAdresse(String idAdresse) {
         this.idAdresse = idAdresse;
     }
 
@@ -68,5 +66,17 @@ public class AdresseServiceApi {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    @Override
+    public String toString() {
+        return "AdresseServiceApi{" +
+                "idAdresse=" + idAdresse +
+                ", ligneAdresse1='" + ligneAdresse1 + '\'' +
+                ", ligneAdresse2='" + ligneAdresse2 + '\'' +
+                ", ligneAdresse3='" + ligneAdresse3 + '\'' +
+                ", codePostal='" + codePostal + '\'' +
+                ", ville='" + ville + '\'' +
+                '}';
     }
 }

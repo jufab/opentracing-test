@@ -1,9 +1,7 @@
 package fr.pe.test.application.v1.rest.ressource;
 
-import java.util.UUID;
-
 public class PersonneAPI {
-    UUID idPersonne;
+    String idPersonne;
     String nom;
     String prenom;
     AdresseAPI adresseAPI;
@@ -11,18 +9,18 @@ public class PersonneAPI {
     public PersonneAPI() {
     }
 
-    public PersonneAPI(UUID idPersonne, String nom, String prenom, AdresseAPI adresseAPI) {
+    public PersonneAPI(String idPersonne, String nom, String prenom, AdresseAPI adresseAPI) {
         this.idPersonne = idPersonne;
         this.nom = nom;
         this.prenom = prenom;
         this.adresseAPI = adresseAPI;
     }
 
-    public UUID getIdPersonne() {
+    public String getIdPersonne() {
         return idPersonne;
     }
 
-    public void setIdPersonne(UUID idPersonne) {
+    public void setIdPersonne(String idPersonne) {
         this.idPersonne = idPersonne;
     }
 
@@ -48,5 +46,15 @@ public class PersonneAPI {
 
     public void setAdresseAPI(AdresseAPI adresseAPI) {
         this.adresseAPI = adresseAPI;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonneAPI{" +
+                "idPersonne=" + idPersonne +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", adresseAPI=" + adresseAPI +
+                '}';
     }
 }

@@ -8,8 +8,13 @@ import java.util.List;
 
 @ApplicationScoped
 public class GetDesAdressesAPartirDuNomDeLAdresse {
-    @Inject
+
     AdressesPort adressesPort;
+
+    @Inject
+    public GetDesAdressesAPartirDuNomDeLAdresse(AdressesPort adressesPort) {
+        this.adressesPort = adressesPort;
+    }
 
     public List<Adresse> execute(String nomAdresse) {
         return this.adressesPort.getDesAdressesAPartirDuNomDeLAdresse(nomAdresse);

@@ -1,0 +1,79 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: tracing
+  name: adresse-data-gouv-api-config
+  labels:
+    name: adresse-data-gouv-api-config
+    app: adresse-data-gouv-api
+data:
+  NIVEAU_LOG: "INFO"
+  KUMULUZEE_SERVER_HTTP_PORT: "8080"
+  JAEGER_HOST: "jaeger-agent.default"
+  JAEGER_PORT: "5775"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: tracing
+  name: adresse-data-gouv-api
+  labels:
+    name: adresse-data-gouv-api
+    app: adresse-data-gouv-api
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      name: adresse-data-gouv-api
+      app: adresse-data-gouv-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        name: adresse-data-gouv-api
+        app: adresse-data-gouv-api
+    spec:
+      containers:
+        - name: adresse-data-gouv-api
+          image: adresse-data-gouv-api-microprofile:1.0-SNAPSHOT
+          imagePullPolicy: Never
+          ports:
+            - name: adga-c
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: adga-c
+            initialDelaySeconds: 30
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: adga-c
+          envFrom:
+            - configMapRef:
+                name: adresse-data-gouv-api-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  adresse-data-gouv-api-service
+  labels:
+    name: adresse-data-gouv-api-service
+    app: adresse-data-gouv-api
+spec:
+  selector:
+    name: adresse-data-gouv-api
+    app: adresse-data-gouv-api
+  type:  LoadBalancer
+  ports:
+    - name: adga-port
+      port:  80
+      targetPort:  8080
+#----------------------fin------------------------#

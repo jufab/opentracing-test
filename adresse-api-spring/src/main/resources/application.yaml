@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: adresse-api
+  zipkin:
+    base-url: http://${JAEGER_HOST:localhost}:9411/
+#On joue avec le probability pour le nombre de trace récupérer 0.1=10%
+  sleuth:
+    sampler:
+      probability: 1.0
+  #le rate c'est le nombre de requete par seconde
+      rate: 10
+application:
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}

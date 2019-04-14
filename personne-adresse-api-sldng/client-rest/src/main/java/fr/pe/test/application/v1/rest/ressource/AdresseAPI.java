@@ -1,9 +1,7 @@
 package fr.pe.test.application.v1.rest.ressource;
 
-import java.util.UUID;
-
 public class AdresseAPI {
-    UUID idAdresse;
+    String idAdresse;
     String ligneAdresse1;
     String ligneAdresse2;
     String ligneAdresse3;
@@ -13,7 +11,7 @@ public class AdresseAPI {
     public AdresseAPI() {
     }
 
-    public AdresseAPI(UUID idAdresse, String ligneAdresse1, String ligneAdresse2, String ligneAdresse3, String codePostal, String ville) {
+    public AdresseAPI(String idAdresse, String ligneAdresse1, String ligneAdresse2, String ligneAdresse3, String codePostal, String ville) {
         this.idAdresse = idAdresse;
         this.ligneAdresse1 = ligneAdresse1;
         this.ligneAdresse2 = ligneAdresse2;
@@ -22,11 +20,11 @@ public class AdresseAPI {
         this.ville = ville;
     }
 
-    public UUID getIdAdresse() {
+    public String getIdAdresse() {
         return idAdresse;
     }
 
-    public void setIdAdresse(UUID idAdresse) {
+    public void setIdAdresse(String idAdresse) {
         this.idAdresse = idAdresse;
     }
 
@@ -68,5 +66,17 @@ public class AdresseAPI {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    @Override
+    public String toString() {
+        return "AdresseAPI{" +
+                "idAdresse=" + idAdresse +
+                ", ligneAdresse1='" + ligneAdresse1 + '\'' +
+                ", ligneAdresse2='" + ligneAdresse2 + '\'' +
+                ", ligneAdresse3='" + ligneAdresse3 + '\'' +
+                ", codePostal='" + codePostal + '\'' +
+                ", ville='" + ville + '\'' +
+                '}';
     }
 }
