@@ -11,6 +11,9 @@ public class GetDesAdressesAPartirDuNomDeLAdresse {
 
     AdressesPort adressesPort;
 
+    GetDesAdressesAPartirDuNomDeLAdresse() {
+    }
+
     @Inject
     public GetDesAdressesAPartirDuNomDeLAdresse(AdressesPort adressesPort) {
         this.adressesPort = adressesPort;

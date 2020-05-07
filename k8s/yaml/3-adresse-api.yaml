@@ -26,7 +26,7 @@ spec:
         name: redis-adresse-api
     spec:
       containers:
-        - name: redis-carnet-entretien
+        - name: redis-adresse-api
           image: redis
           # resources:
           #    limits:

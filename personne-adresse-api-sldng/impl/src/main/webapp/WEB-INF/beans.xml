@@ -4,12 +4,4 @@
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
        bean-discovery-mode="all">
-<!--        <interceptors>
-            &lt;!&ndash;<class>fr.pe.sldng.metrologie.integration.IntercepteurMetrologie</class>&ndash;&gt;
-            &lt;!&ndash;<class>fr.pe.sldng.carteappelpn.integration.IntercepteurCarteAppelPN</class>&ndash;&gt;
-            &lt;!&ndash;<class>fr.pe.sldng.carteappel.integration.IntercepteurCarteAppel</class>&ndash;&gt;
-        </interceptors>-->
-    <interceptors>
-        <class>io.opentracing.contrib.cdi.CdiOpenTracingInterceptor</class>
-    </interceptors>
 </beans>

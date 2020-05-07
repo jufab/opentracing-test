@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG_CARTE_APPEL ACTIVATION="true">
+    <ENVOI DELAI="60" NB_TRACES="1" />
+    <PLAGE_HORAIRE DEBUT="00:00" FIN="12:00" />
+    <PLAGE_HORAIRE DEBUT="12:00" FIN="23:59" />
+    <APPLICATIONS LISTE="*" />
+    <JMS FACTORY="fabriqueJMSXA" FILE="carteappel" URL="t3://localhost:7001" />
+</CONFIG_CARTE_APPEL>

@@ -1,7 +1,5 @@
 package fr.pe.test.infrastructure.service.adresseapispring;
 
-import io.opentracing.contrib.jaxrs2.client.ClientTracingFeature;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -17,9 +15,14 @@ public class AdresseServiceExterneAdapter {
         this.urlAdressesApiSpring = urlAdressesApiSpring;
     }
 
+    private Client getClient() {
+        //return Client client = ClientTracingRegistrar.configure(ClientBuilder.newBuilder()).build();
+        return ClientBuilder.newBuilder().build();
+    }
+
     public AdresseServiceApi findAdresse(String idAdresse) {
-        Client client = ClientBuilder.newBuilder().register(ClientTracingFeature.class).build();
-        //Client client = ClientTracingRegistrar.configure(ClientBuilder.newBuilder()).build();
+        //Span span = tracer.buildSpan("adresse-api").start();
+        Client client = getClient();
         try {
             return client.target(this.urlAdressesApiSpring)
                     .path(V_1_ADRESSES + "/" + idAdresse)
@@ -27,11 +30,12 @@ public class AdresseServiceExterneAdapter {
                     .get(AdresseServiceApi.class);
         } finally {
             client.close();
+            //span.finish();
         }
     }
 
     public AdresseServiceApi saveAdresse(AdresseServiceApi adresseServiceApi) {
-        Client client = ClientBuilder.newBuilder().register(ClientTracingFeature.class).build();
+        Client client = getClient();
         try {
             return client.target(this.urlAdressesApiSpring)
                     .path(V_1_ADRESSES)

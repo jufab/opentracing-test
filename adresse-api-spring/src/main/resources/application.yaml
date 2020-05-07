@@ -1,9 +1,13 @@
+
 spring:
   application:
     name: adresse-api
   zipkin:
-    base-url: http://${JAEGER_HOST:localhost}:9411/
-#On joue avec le probability pour le nombre de trace récupérer 0.1=10%
+    base-url: http://${JAEGER_HOST:localhost}:9412/
+    discovery-client-enabled: false
+    sender:
+      type: web
+  #On joue avec le probability pour le nombre de trace récupérer 0.1=10%
   sleuth:
     sampler:
       probability: 1.0
@@ -13,3 +17,8 @@ application:
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
+logging:
+  level:
+    root: debug
+server:
+  port: ${SPRING_PORT:7070}

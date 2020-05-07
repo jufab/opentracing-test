@@ -1,0 +1,7 @@
+{
+  "/facade": {
+    "target": "http://localhost:10080/",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

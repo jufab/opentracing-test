@@ -11,11 +11,11 @@
 
     <properties>
         <version.junit.jupiter>5.3.2</version.junit.jupiter>
-        <version.thorntail>2.4.0.Final</version.thorntail>
-        <version.redis.jedis>3.0.1</version.redis.jedis>
-        <version.testcontainer>1.10.7</version.testcontainer>
-        <version.rest-assured>3.2.0</version.rest-assured>
-        <version.junit5>5.2.0</version.junit5>
+        <version.thorntail>2.6.0.Final</version.thorntail>
+        <version.redis.jedis>3.2.0</version.redis.jedis>
+        <version.testcontainer>1.12.4</version.testcontainer>
+        <version.rest-assured>4.1.2</version.rest-assured>
+        <version.junit5>5.5.2</version.junit5>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -25,10 +25,12 @@
     <modules>
         <module>zipkin</module>
         <module>jaeger</module>
-        <module>personne-api-thorntail</module>
+        <!--<module>personne-api-thorntail</module>-->
+        <module>personne-api-quarkus</module>
         <module>adresse-api-spring</module>
         <module>adresse-data-gouv-api-microprofile</module>
         <module>personne-adresse-api-sldng</module>
+        <module>personne-adresse-api-quarkus</module>
         <module>redis</module>
         <module>k8s</module>
     </modules>

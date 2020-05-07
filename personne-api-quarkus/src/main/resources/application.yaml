@@ -1,0 +1,19 @@
+quarkus:
+  jaeger:
+    enabled: true
+    service-name: personne-api
+    agent-host-port: localhost:6831
+    #endpoint: ${env.JAEGER_ENDPOINT:http://localhost:14268/api/traces}
+    reporter-log-spans: true
+    #reporter-max-queue-size: 3
+    #reporter-flush-interval: PT10S
+    sampler-type: const
+    sampler-param: 1
+    propagation: b3
+    #enable-b3-header-propagation: true
+  log:
+    level: DEBUG
+
+redis:
+  host: ${env.URL_REDIS:localhost}
+  port: ${env.PORT_REDIS:6379}

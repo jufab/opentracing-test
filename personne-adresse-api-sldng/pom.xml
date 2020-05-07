@@ -17,9 +17,30 @@
 
 	<properties>
 		<!-- Version du Framework à embarquer -->
-		<framework.version>2.8.0-b20190227-462</framework.version>
+		<framework.version>2.9.2-b20190920-00</framework.version>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- CONFIGURATION LDAP -->
+		<annuaire.url-principale>ldap://127.0.0.1:389/</annuaire.url-principale>
+		<annuaire.racine>o=aae.domaine.intra</annuaire.racine>
+		<ldap.taille-pool>2</ldap.taille-pool>
+		<ldap.timeout>20000</ldap.timeout>
+		<ldap.nb-connexions-max>5</ldap.nb-connexions-max>
+
+		<!-- CONFIGURATION METROLOGIE -->
+		<sldng.metrologie.url-configuration>metrologie.xml</sldng.metrologie.url-configuration>
+		<sldng.metrologie.taille-tampon-emission>3</sldng.metrologie.taille-tampon-emission>
+
+		<!-- MODULE LOGS CENTRALISES -->
+		<sldng.log.stat.url-serveur>http://localhost</sldng.log.stat.url-serveur>
+
+		<!-- CONFIGURATION CARTES APPEL -->
+		<sldng.carteappel.url-configuration>configurationCarteAppel.xml</sldng.carteappel.url-configuration>
+
+		<!-- CONFIGURATION IDFIX -->
+		<sldng.supervision.idfix.url-admin-service>http://localhost/</sldng.supervision.idfix.url-admin-service>
+
 	</properties>
 
 	<!-- Profiles -->
@@ -30,11 +51,11 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
 			<properties>
-				<sldng.integration.desactiver-controle-entetes>false</sldng.integration.desactiver-controle-entetes>
+				<sldng.integration.desactiver-controle-entetes>true</sldng.integration.desactiver-controle-entetes>
 				<sldng.securite.desactiver-controle>true</sldng.securite.desactiver-controle>
 				<sldng.ldap.desactiver-controle-chargement-annuaire>true</sldng.ldap.desactiver-controle-chargement-annuaire>
-				<url.adresse.api>http://adresse-api:8080/</url.adresse.api>
-				<url.personne.api>http://personne-api:9090/</url.personne.api>
+				<url.adresse.api>http://localhost:7070/</url.adresse.api>
+				<url.personne.api>http://localhost:8080/</url.personne.api>
 			</properties>
 		</profile>
 

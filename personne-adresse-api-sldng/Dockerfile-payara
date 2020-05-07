@@ -1,0 +1,10 @@
+FROM docker-virtual.artefact-repo.pole-emploi.intra/payara/micro:latest
+ENV JAEGER_SERVICE_NAME="personne-adresse-api"
+ENV JAEGER_SAMPLER_TYPE="const"
+ENV JAEGER_AGENT_PORT="5775"
+ENV JAEGER_PROPAGATION="b3"
+ENV JAEGER_REPORTER_LOG_SPANS="true"
+ENV JAEGER_SAMPLER_PARAM="1"
+ENV JAEGER_AGENT_HOST="jaeger"
+
+COPY impl/target/personne-adresse-api-sldng.war $DEPLOY_DIR

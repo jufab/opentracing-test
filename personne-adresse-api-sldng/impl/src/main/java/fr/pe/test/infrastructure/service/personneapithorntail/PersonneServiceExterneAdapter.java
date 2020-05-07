@@ -1,6 +1,5 @@
 package fr.pe.test.infrastructure.service.personneapithorntail;
 
-import io.opentracing.contrib.jaxrs2.client.ClientTracingFeature;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -11,6 +10,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+
 public class PersonneServiceExterneAdapter {
     private static final String V_1_PERSONNES = "/personnes";
 
@@ -20,8 +20,13 @@ public class PersonneServiceExterneAdapter {
         this.urlPersonneApiThorntail = urlPersonneApiThorntail;
     }
 
+    private Client getClient() {
+        //return ClientTracingRegistrar.configure(ClientBuilder.newBuilder()).build();
+        return ClientBuilder.newBuilder().build();
+    }
+
     public List<PersonneServiceApi> findAllPersonnes() {
-        Client client = ClientBuilder.newBuilder().register(ClientTracingFeature.class).build();
+        Client client = getClient();
         try {
             return client.target(this.urlPersonneApiThorntail)
                     .path(V_1_PERSONNES)
@@ -34,8 +39,7 @@ public class PersonneServiceExterneAdapter {
     }
 
     public PersonneServiceApi findPersonneById(UUID idPersonne) {
-        Client client = ClientBuilder.newBuilder().register(ClientTracingFeature.class).build();
-        //Client client = ClientTracingRegistrar.configure(ClientBuilder.newBuilder()).build();
+        Client client = getClient();
         try {
             return client.target(this.urlPersonneApiThorntail)
                     .path(V_1_PERSONNES + "/" + idPersonne)
@@ -47,12 +51,12 @@ public class PersonneServiceExterneAdapter {
     }
 
     public PersonneServiceApi savePersonne(PersonneServiceApi personneServiceApi) {
-        Client client = ClientBuilder.newBuilder().register(ClientTracingFeature.class).build();
+        Client client = getClient();
         try {
             return client.target(this.urlPersonneApiThorntail)
                     .path(V_1_PERSONNES)
                     .request(MediaType.APPLICATION_JSON)
-                    .post(Entity.entity(personneServiceApi, MediaType.APPLICATION_JSON),PersonneServiceApi.class);
+                    .post(Entity.entity(personneServiceApi, MediaType.APPLICATION_JSON), PersonneServiceApi.class);
         } finally {
             client.close();
         }

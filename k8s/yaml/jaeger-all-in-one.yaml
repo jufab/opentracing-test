@@ -12,10 +12,11 @@
 # the License.
 #
 
+---
 apiVersion: v1
 kind: List
 items:
-  - apiVersion: extensions/v1beta1
+  - apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: jaeger
@@ -27,6 +28,11 @@ items:
       replicas: 1
       strategy:
         type: Recreate
+      selector:
+        matchLabels:
+          app: jaeger
+          app.kubernetes.io/name: jaeger
+          app.kubernetes.io/component: all-in-one
       template:
         metadata:
           labels:
@@ -72,7 +78,7 @@ items:
     spec:
       ports:
         - name: query-http
-          port: 80
+          port: 8090
           protocol: TCP
           targetPort: 16686
       selector:
@@ -153,4 +159,3 @@ items:
       selector:
         app.kubernetes.io/name: jaeger
         app.kubernetes.io/component: all-in-one
-

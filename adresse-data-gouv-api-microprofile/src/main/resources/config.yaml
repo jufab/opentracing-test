@@ -3,6 +3,10 @@ kumuluzee:
   version: 1.0-SNAPSHOT
   env:
     name: dev
+  server:
+    http:
+      port: 6060
+      proxy-forwarding: true
   metrics:
     web-instrumentation:
       - name: testEndpoint
@@ -25,12 +29,16 @@ kumuluzee:
 
 #        manager-host-port: http://localhost:5775
       propagation: B3
-#      traceid-128bit: tru
+#      traceid-128bit: true
 url:
   api:
     adresse:
       base:
         nationale: https://api-adresse.data.gouv.fr/
+use:
+  proxy:
+    pole-emploi: true
+
 mp:
   opentracing:
     server:
