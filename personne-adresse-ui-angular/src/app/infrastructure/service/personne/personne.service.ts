@@ -10,10 +10,13 @@ import { v4 } from 'uuid';
   providedIn: 'root'
 })
 export class PersonneService {
+  uuid = v4();
   httpHeaderFwk: HttpHeaders= new HttpHeaders(
     {
       'Content-Type': 'application/json',
-      'pe-id-correlation': v4(),
+      'pe-id-correlation': this.uuid,
+      'span_id': this.uuid,
+      'trace_id': this.uuid,
       'pe-id-utilisateur': 'IJFA3650',
       'pe-nom-application': 'personne-adresse-ui'
     }
